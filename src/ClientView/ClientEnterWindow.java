@@ -111,9 +111,26 @@ public class ClientEnterWindow extends JFrame implements ActionListener {
                 }
                 if (entered){
                     System.out.println("logging success");
-                    new ClientSelectWindow();
+                    new ClientSelectWindow(this);
                 }else {
                     System.out.println("logging failure");
+                }
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        }else if (source.getText().equals("зЂВс")){
+            String signString = INSERT + "user(username,pwd)" +VALUES
+            + "('" + InputName.getText()+"','"+InputPwd.getText()+"')";
+            System.out.println(signString);
+            try {
+                Statement statement = conn.createStatement();
+                int res = statement.executeUpdate(signString);
+                System.out.println(res);
+                if (res == 1){
+                    System.out.println("Insert success!");
+                    
+                }else  {
+                    System.out.println("false");
                 }
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
