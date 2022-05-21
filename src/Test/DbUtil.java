@@ -5,6 +5,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+
+import static ClientView.ClientSelectWindow.*;
+
 public class DbUtil extends JFrame {
     //public static final String URL = "jdbc:mysql://localhost:3306/test";
 
@@ -27,6 +30,8 @@ public class DbUtil extends JFrame {
         try {
             conn = DriverManager.getConnection(URL, "zsr", "123456");//建立和数据库的连接，并返回表示连接的Connection对象
             System.out.println("数据库连接成功");
+            Statement statement = conn.createStatement();
+            String qsl= SELECT+ "*" + FROM + "负责治疗";
         } catch (Exception e) {//未连接成功，执行下面的异常处理
             System.out.println("数据库连接失败!!!");
         }

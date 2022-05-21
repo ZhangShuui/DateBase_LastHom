@@ -19,7 +19,7 @@ public class ClientEnterWindow extends JFrame implements ActionListener {
     public JTextField InputName;
     public JTextField InputPwd;
     public JLabel ShowTitle;
-    public final String driver = "com.mysql.cj.jdbc.Driver";//Êı¾İ¿âÇı¶¯ÀàËù¶ÔÓ¦µÄ×Ö·û´®
+    public final String driver = "com.mysql.cj.jdbc.Driver";//ï¿½ï¿½ï¿½İ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
     public JPanel centerPanel;
     public JPanel bottomPanel;
     public final String URL = "jdbc:mysql://localhost:3306/test?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8";
@@ -28,16 +28,16 @@ public class ClientEnterWindow extends JFrame implements ActionListener {
     public ClientEnterWindow(){
         conn = null;
         try {
-            Class.forName(driver);//¼ÓÔØMySQLÊı¾İ¿âÇı¶¯
-        } catch (java.lang.ClassNotFoundException ee) {//Èç¹ûÕÒ²»µ½Õâ¸öÀà£¬Ö´ĞĞÏÂÃæµÄÒì³£´¦Àí
-            System.out.println("Çı¶¯³ÌĞòÅäÖÃÎ´ÅäÖÃ³É¹¦!!!");
+            Class.forName(driver);//ï¿½ï¿½ï¿½ï¿½MySQLï¿½ï¿½ï¿½İ¿ï¿½ï¿½ï¿½ï¿½ï¿½
+        } catch (java.lang.ClassNotFoundException ee) {//ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à£¬Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½
+            System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½Ã³É¹ï¿½!!!");
             return;
         }
         try {
-            conn = DriverManager.getConnection(URL, "zsr", "123456");//½¨Á¢ºÍÊı¾İ¿âµÄÁ¬½Ó£¬²¢·µ»Ø±íÊ¾Á¬½ÓµÄConnection¶ÔÏó
-            System.out.println("Êı¾İ¿âÁ¬½Ó³É¹¦");
-        } catch (Exception ee) {//Î´Á¬½Ó³É¹¦£¬Ö´ĞĞÏÂÃæµÄÒì³£´¦Àí
-            System.out.println("Êı¾İ¿âÁ¬½ÓÊ§°Ü!!!");
+            conn = DriverManager.getConnection(URL, "zsr", "123456");//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ¿ï¿½ï¿½ï¿½ï¿½ï¿½Ó£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½Ê¾ï¿½ï¿½ï¿½Óµï¿½Connectionï¿½ï¿½ï¿½ï¿½
+            System.out.println("ï¿½ï¿½ï¿½İ¿ï¿½ï¿½ï¿½ï¿½Ó³É¹ï¿½");
+        } catch (Exception ee) {//Î´ï¿½ï¿½ï¿½Ó³É¹ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½
+            System.out.println("ï¿½ï¿½ï¿½İ¿ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½!!!");
         }
         MyInit();
     }
@@ -47,8 +47,8 @@ public class ClientEnterWindow extends JFrame implements ActionListener {
         centerPanel = new JPanel();
         centerPanel.setLayout(new GridLayout(2,2));
         centerPanel.setSize(200,100);
-        JLabel nameLabel=new JLabel("ÇëÊäÈëÕËºÅ:");
-        JLabel pwdLabel = new JLabel("ÇëÊäÈëÃÜÂë:");
+        JLabel nameLabel=new JLabel("è¯·è¾“å…¥è´¦å·ï¼š");
+        JLabel pwdLabel = new JLabel("è¯·è¾“å…¥å¯†ç ï¼š");
         nameLabel.setVisible(true);
         pwdLabel.setVisible(true);
         nameLabel.setSize(50,50);
@@ -65,10 +65,10 @@ public class ClientEnterWindow extends JFrame implements ActionListener {
         centerPanel.add(InputPwd);
         centerPanel.setVisible(true);
 
-        enter = new JButton("µÇÂ¼");
+        enter = new JButton("ç™»å½•");
         enter.setVisible(true);
         enter.addActionListener(this);
-        signUp = new JButton("×¢²á");
+        signUp = new JButton("æ³¨å†Œ");
         signUp.setVisible(true);
         signUp.addActionListener(this);
         bottomPanel =new JPanel();
@@ -76,7 +76,7 @@ public class ClientEnterWindow extends JFrame implements ActionListener {
         bottomPanel.setVisible(true);
         bottomPanel.add(enter);
         bottomPanel.add(signUp);
-        ShowTitle = new JLabel("·Î½á½ÚĞÅÏ¢¼ÇÂ¼²éÑ¯ÏµÍ³",SwingConstants.CENTER);
+        ShowTitle = new JLabel("æ¬¢è¿è¿›å…¥è‚ºç»“èŠ‚æŸ¥è¯¢ç³»ç»Ÿ",SwingConstants.CENTER);
         ShowTitle.setVisible(true);
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(ShowTitle,BorderLayout.NORTH);
@@ -94,7 +94,7 @@ public class ClientEnterWindow extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton source = (JButton)e.getSource();
-        if (source.getText().equals("µÇÂ¼") ){
+        if (source.getText().equals("ç™»å½•") ){
             String logString = SELECT + "username" + "," +
                     "pwd" + FROM + "user" +
                     WHERE + "username= " +
@@ -111,14 +111,16 @@ public class ClientEnterWindow extends JFrame implements ActionListener {
                 }
                 if (entered){
                     System.out.println("logging success");
+
                     new ClientSelectWindow(this);
+                    setVisible(false);
                 }else {
                     System.out.println("logging failure");
                 }
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
-        }else if (source.getText().equals("×¢²á")){
+        }else if (source.getText().equals("æ³¨å†Œ")){
             String signString = INSERT + "user(username,pwd)" +VALUES
             + "('" + InputName.getText()+"','"+InputPwd.getText()+"')";
             System.out.println(signString);
