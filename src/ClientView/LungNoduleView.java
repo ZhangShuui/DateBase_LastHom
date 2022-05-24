@@ -13,6 +13,7 @@ public class LungNoduleView extends JFrame implements ActionListener {
     ClientSelectWindow c;
     public static final String[] patientCol = {"病人编号","病例数","负责医生"};
     public static final String[] medicineCol = {"药物编号","名称","总量","生产公司"};
+    public static final String[] noduleCol = {"病例号","位置","特征","良恶性"};
     JLabel titleLabel;
     JPanel viewPanel;
     JPanel operatePanel;
@@ -38,6 +39,9 @@ public class LungNoduleView extends JFrame implements ActionListener {
     JPanel thirdPanel;
     JButton updateNodule;
     JButton addMedicine;
+    JPanel zeroPanel;
+    JButton checkNodule;
+    JTextField inputId;
     private void Init() {
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -67,7 +71,7 @@ public class LungNoduleView extends JFrame implements ActionListener {
         operatePanel = new JPanel();
         operatePanel.setSize(800,650);
         getContentPane().add(operatePanel,BorderLayout.EAST);
-        operatePanel.setLayout(new GridLayout(4,1));
+        operatePanel.setLayout(new GridLayout(6,1));
         JPanel firstPanel = new JPanel();
         firstPanel.setLayout(new GridLayout(1,2));
         patientId = new JTextField();
@@ -76,6 +80,16 @@ public class LungNoduleView extends JFrame implements ActionListener {
         firstPanel.add(patientId);
         firstPanel.add(delPatient);
         operatePanel.add(firstPanel);
+        zeroPanel = new JPanel();
+        zeroPanel.setLayout(new GridLayout(1,2));
+        inputId = new JTextField();
+        inputId.setVisible(true);
+        zeroPanel.add(inputId);
+        checkNodule = new JButton("输入病人编号，查看其病例:");
+        checkNodule.setVisible(true);
+        checkNodule.addActionListener(this);
+        zeroPanel.add(checkNodule);
+        operatePanel.add(zeroPanel);
         secondPanel = new JPanel();
         secondPanel.setLayout(new GridLayout(1,4));
         patientIdUpdate = new JTextField();
@@ -212,6 +226,28 @@ public class LungNoduleView extends JFrame implements ActionListener {
                 }
             } catch (SQLException ex) {
                 JOptionPane.showConfirmDialog(this,"修改失败!");
+                throw new RuntimeException(ex);
+            }
+        }else if (s.getText().equals(checkNodule.getText())){
+            String sql = SELECT + "b."+noduleCol[0]+","+noduleCol[1]+","+noduleCol[2]+","+noduleCol[3] + FROM +"肺结节"+" a"+JOIN +"病人"+" b" +ON+"a.病例号=b.病例号" +WHERE + "病人编号="+ inputId.getText();
+            System.out.println(sql);
+            try {
+                Statement stm = conn.createStatement();
+                ResultSet res = stm.executeQuery(sql);
+                Object[][] data = new String[50][4];
+                for (int i = 0; res.next(); i++) {
+                    data[i][0] = res.getString(noduleCol[0]);
+                    data[i][1] = res.getString(noduleCol[1]);
+                    data[i][2] = res.getString(noduleCol[2]);
+                    data[i][3] = res.getString(noduleCol[3]);
+                }
+                patientTable.removeAll();
+                DefaultTableModel newModel = new DefaultTableModel(data,noduleCol);
+                patientTable.setModel(newModel);
+                patientTable.repaint();
+                up.repaint();
+
+            } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
         }

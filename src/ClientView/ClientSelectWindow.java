@@ -11,6 +11,8 @@ public class ClientSelectWindow extends JFrame implements ActionListener {
     public static final String AND = " AND ";
     public static final String FROM = " FROM ";
     public static final String WHERE = " WHERE ";
+    public static final String JOIN = " JOIN ";
+    public static final String ON = " ON ";
 
     public static final String INSERT = " INSERT INTO ";
     public static final String VALUES = " VALUES ";

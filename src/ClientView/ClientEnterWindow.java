@@ -17,7 +17,7 @@ public class ClientEnterWindow extends JFrame implements ActionListener {
     public JButton enter;
     public JButton signUp;
     public JTextField InputName;
-    public JTextField InputPwd;
+    public JPasswordField InputPwd;
     public JLabel ShowTitle;
     public final String driver = "com.mysql.cj.jdbc.Driver";//���ݿ�����������Ӧ���ַ���
     public JPanel centerPanel;
@@ -28,16 +28,16 @@ public class ClientEnterWindow extends JFrame implements ActionListener {
     public ClientEnterWindow(){
         conn = null;
         try {
-            Class.forName(driver);//����MySQL���ݿ�����
-        } catch (java.lang.ClassNotFoundException ee) {//����Ҳ�������ִ࣬��������쳣����
-            System.out.println("������������δ���óɹ�!!!");
+            Class.forName(driver);
+        } catch (java.lang.ClassNotFoundException ee) {
+            System.out.println("加载驱动失败");
             return;
         }
         try {
-            conn = DriverManager.getConnection(URL, "zsr", "123456");//���������ݿ�����ӣ������ر�ʾ���ӵ�Connection����
-            System.out.println("���ݿ����ӳɹ�");
-        } catch (Exception ee) {//δ���ӳɹ���ִ��������쳣����
-            System.out.println("���ݿ�����ʧ��!!!");
+            conn = DriverManager.getConnection(URL, "zsr", "123456");
+            System.out.println("连接成功");
+        } catch (Exception ee) {
+            System.out.println("连接失败");
         }
         MyInit();
     }
@@ -56,7 +56,7 @@ public class ClientEnterWindow extends JFrame implements ActionListener {
         InputName = new JTextField();
         InputName.setVisible(true);
         InputName.setSize(150,50);
-        InputPwd = new JTextField();
+        InputPwd = new JPasswordField();
         InputPwd.setVisible(true);
         InputPwd.setSize(150,50);
         centerPanel.add(nameLabel);
@@ -110,12 +110,12 @@ public class ClientEnterWindow extends JFrame implements ActionListener {
                     entered = true;
                 }
                 if (entered){
-                    System.out.println("logging success");
-
+                    System.out.println();
+                    System.out.println("登陆成功");
                     new ClientSelectWindow(this);
                     setVisible(false);
                 }else {
-                    System.out.println("logging failure");
+                    System.out.println("登录失败");
                 }
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
