@@ -162,22 +162,27 @@ public class LungNoduleView extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JButton s = (JButton) e.getSource();
         if (s.getText().equals("删除病人记录")){
-            String sql = DELETE + FROM + "病人" +WHERE + "病人编号='" + patientId.getText()+"'";
             try {
-                Statement statement = conn.createStatement();
-                int result = statement.executeUpdate(sql);
-                if (result > 0){
-                    patientTable.removeAll();
-                    patientModel = new DefaultTableModel(getPatientData(),patientCol);
-                    patientTable.setModel(patientModel);
+                String sql = "{CALL del(?)}";
+                CallableStatement clm = conn.prepareCall(sql);
+                Integer num = Integer.parseInt(patientId.getText());
+                clm.setInt(1,num);
+                int res = clm.executeUpdate();
+                if (res > 0){
+                    System.out.println("调用成功");
+                    JOptionPane.showConfirmDialog(this,"修改成功!");
+                    Object[][] data = getPatientData();
+                    DefaultTableModel newModel = new DefaultTableModel(data,patientCol);
+                    patientTable.setModel(newModel);
                     patientTable.repaint();
                     up.repaint();
                     viewPanel.repaint();
-                    JOptionPane.showConfirmDialog(this,"删除成功");
                 }else {
-                    JOptionPane.showConfirmDialog(this,"删除失败");
+                    JOptionPane.showConfirmDialog(this,"修改失败!");
+                    System.out.println("调用失败");
                 }
             } catch (SQLException ex) {
+                JOptionPane.showConfirmDialog(this,"修改失败!");
                 throw new RuntimeException(ex);
             }
 
