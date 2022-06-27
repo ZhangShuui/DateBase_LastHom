@@ -144,8 +144,6 @@ public class HospitalView extends JFrame implements ActionListener {
                     data[i][3] = res.getString(hosCol[3]);
                 }
                 hospitalTable.removeAll();
-
-                hospitalTable.removeAll();
                 DefaultTableModel newModel = new DefaultTableModel(data,hosCol);
                 hospitalTable.setModel(newModel);
                 hospitalTable.repaint();
@@ -156,6 +154,7 @@ public class HospitalView extends JFrame implements ActionListener {
             }
         }else if (source.getText().equals(searchButtons[2].getText())){
             sql = SELECT +"医生编号,姓名,职称,医院" + FROM +"医生plus" +WHERE + "医院='"+inputFields[2].getText()+"'";
+            //yi wu !
             System.out.println(sql);
             try {
                 Statement stm = conn.createStatement();
